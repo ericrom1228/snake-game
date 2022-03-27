@@ -117,8 +117,6 @@ screen = pygame.display.set_mode((screen_width,screen_height))
 pygame.display.set_caption('snake')
 clock = pygame.time.Clock()
 
-#cell = pygame.Rect(0,10,10,10) # left, top, width, height
-
 columns = 17
 rows = 15
 cell_width = 30
@@ -130,7 +128,6 @@ for row in range(rows):
 	for col in range(columns):
 		grid[row].append((int(row*(screen_height/rows)), int(col*(screen_width/columns))))
 
-# print(grid[14][16]) #grid[y][x]
 # grid_x corresponds to col
 # grid_y corresponds to row
 player = Player(2,6) # starting grid position (grid_x, grid_y)
@@ -166,27 +163,15 @@ while not game_over:
 	
 
 	direction = player.get_direction(direction)
-
-	#print('at top:')
-	#print(player.direction)
-	#print(player.body)
-
 	new_direction = player.move(direction)
 	direction = new_direction
 
 	food.draw(screen)
 
 	if (player.head[0], player.head[1]) == (food.grid_x, food.grid_y):
-		#print('food found at', player.head[0], player.head[1])
 		player.add_square()
 		food.move(player.body)
-		#print('food moved to', food.grid_x, food.grid_y)
 
-	#print('at bottom:')
-	#rint(player.direction)
-	#print(player.body)
-
-	#print('\n')
 	pygame.display.update()
 	pygame.time.delay(100)
 	clock.tick(60)
